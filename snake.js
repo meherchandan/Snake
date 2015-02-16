@@ -68,6 +68,8 @@ else if ( event.keyCode === 40 ) {//Down arrow
 
      else   if ( event.keyCode === 37 ) {//Left arrow
             event.preventDefault();
+         direction="left";
+         moveLeft();
 
 }
        else if ( event.keyCode === 39 ) {//Right arrow
@@ -92,6 +94,12 @@ var check=true;
 
      setTimeout(function() {
 
+
+         if(direction==="down"){
+           alert("Game Over");
+             clearAll();
+             return;
+         }
          if(!(direction==="up")){
 
              return;
@@ -114,7 +122,7 @@ var check=true;
          $("."+snake[0]).addClass("snakeHead");
 
        moveUp();
-       },500
+       },200
 
 
     );
@@ -129,6 +137,11 @@ var check=true;
      setTimeout(function() {
 
 
+         if(direction==="up"){
+           alert("Game Over");
+             clearAll();
+             return;
+         }
          if(!(direction==="down")){
 
              return;
@@ -143,6 +156,8 @@ var check=true;
              return;
          }
 
+
+
        snake[2]= snake[1];
          snake[1]=snake[0];
 
@@ -153,7 +168,7 @@ var check=true;
          $("."+snake[0]).addClass("snakeHead");
 
            moveDown();
-       },500
+       },200
 
 
     );
@@ -166,6 +181,12 @@ var check=true;
 
      setTimeout(function() {
 
+
+         if(direction==="left"){
+           alert("Game Over");
+             clearAll();
+             return;
+         }
           if(!(direction==="right")){
 
              return;
@@ -190,13 +211,55 @@ var check=true;
          console.log(snake[2]);
         $("."+snake[0]).addClass("snakeHead");
            moveRight();
-       },500
+       },200
 
 
     );
 
 };
 
+
+moveLeft= function(){
+var check=true;
+
+     setTimeout(function() {
+
+
+         if(direction==="right"){
+           alert("Game Over");
+             clearAll();
+             return;
+         }
+          if(!(direction==="left")){
+
+             return;
+         }
+       $("."+snake[0]).removeClass("snakeHead");
+         $("."+snake[0]).addClass("snakeTrail");
+         $("."+snake[2]).removeClass("snakeTrail");
+       var temp=parseInt(snake[0])-1;
+//       if(temp>maxLength){
+//           alert("Game Over");
+//             clearAll();
+//             return;
+//         }
+
+
+       snake[2]= snake[1];
+         snake[1]=snake[0];
+
+          snake[0]=temp;
+          console.log(snake[0]);
+         console.log(snake[1]);
+         console.log(snake[2]);
+        $("."+snake[0]).addClass("snakeHead");
+           moveLeft();
+       },200
+
+
+    );
+
+};
 
 
 
@@ -207,7 +270,7 @@ clearAll=function(){
     $(".grid").removeClass("snakeTrail");
      var len=$(".grid").length;
     len=parseInt(len/2);
-
+    direction="";
    $(".grid").eq(len).addClass("snakeHead");
     $(".grid").eq(len-1).addClass("snakeTrail");
     $(".grid").eq(len-2).addClass("snakeTrail");
