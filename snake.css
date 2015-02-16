@@ -1,0 +1,31 @@
+* {
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.grid{
+    width: 10px;
+    height: 10px;
+
+    display: inline-block;
+
+    border: .5px solid  rgba(180, 180, 180, 0.77);
+    background-color: rgba(180, 180, 180, 0.33);
+
+
+}
+div{
+    margin: 0px;
+    padding-top: 0px;
+}
+
+#row{
+  vertical-align: top;
+    line-height: 0px;
+}
+.snakeHead{
+    background-color: red;
+}
+.snakeTrail{
+    background-color: blue;
+}
