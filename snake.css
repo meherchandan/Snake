@@ -9,8 +9,8 @@
 
     display: inline-block;
 
-    border: .5px solid  rgba(180, 180, 180, 0.77);
-    background-color: rgba(180, 180, 180, 0.33);
+    border: .5px solid  rgba(180, 180, 180, 0.46);
+    background-color: rgba(214, 211, 211, 0.11);
 
 
 }
@@ -28,4 +28,8 @@ div{
 }
 .snakeTrail{
     background-color: blue;
+}
+
+.food{
+    background-color: yellow;
 }
