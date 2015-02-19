@@ -3,9 +3,11 @@ var maxLength = 0;
 var maxwidth = 0;
 
 $(document).ready(function () {
+     var $le = 4000;
+     var $wid = 50;
+
     $('.small').click(function () {
-        var $le = 5100;
-        var $wid = 50;
+
         mainspeed = 200;
         maxLength = $le;
         maxwidth = $wid;
@@ -14,8 +16,7 @@ $(document).ready(function () {
     });
 
     $('.medium').click(function () {
-        var $le = 7100;
-        var $wid = 70;
+
         mainspeed = 180;
         maxLength = $le;
         maxwidth = $wid;
@@ -23,8 +24,7 @@ $(document).ready(function () {
     });
 
     $('.large').click(function () {
-        var $le = 9100;
-        var $wid = 100;
+
         mainspeed = 150;
         maxLength = $le;
         maxwidth = $wid;
@@ -43,6 +43,7 @@ var speed = 200;
 createGrid = function (length, width) {
     var i = 1000;
     var j = 0;
+    speed=200;
     maxLength = length;
     maxwidth - width;
     $("#maingrid").empty();
@@ -55,41 +56,44 @@ createGrid = function (length, width) {
         }
         i = i + 100;
     }
+
+    var snakeclass=length/2+width/2+500;
+    console.log("total"+snakeclass);
     gridsize = $(".grid").length;
 
     var len = $(".grid").length;
     len = parseInt(len / 2);
     GenerateFood();
-    $(".grid").eq(len).addClass("snakeHead");
-    $(".grid").eq(len - 1).addClass("snakeTrail");
-    $(".grid").eq(len - 2).addClass("snakeTrail");
-    snake[0] = $(".grid").eq(len).attr("class").substr(5, 4);
-    snake[1] = $(".grid").eq(len - 1).attr("class").substr(5, 4);
-    snake[2] = $(".grid").eq(len - 2).attr("class").substr(5, 4);
+    $("."+snakeclass).addClass("snakeHead");
+     $("."+(snakeclass-1)).addClass("snakeTrail");
+     $("."+(snakeclass-2)).addClass("snakeTrail");
+    snake[0]=snakeclass;
+    snake[1]=snakeclass-1;
+    snake[2]=snakeclass-2;
 
-    //$("body").keypress(function(){
     $("body").keypress(function (event) {
         if (event.keyCode === 38) { //Up arrow
             event.preventDefault();
+            if(direction!="up"){
             direction = "up";
-            moveUp();
+            moveUp();}
         } else if (event.keyCode === 40) { //Down arrow
             event.preventDefault();
+              if(direction!= "down"){
             direction = "down";
-            moveDown();
+            moveDown();}
         } else if (event.keyCode === 37) { //Left arrow
             event.preventDefault();
+              if( direction!= "left"){
             direction = "left";
-            moveLeft();
+            moveLeft();}
 
         } else if (event.keyCode === 39) { //Right arrow
             event.preventDefault();
+              if( direction!="right"){
             direction = "right";
-            moveRight();
+            moveRight();}
 
-        } else {
-            direction = "right";
-            moveRight();
         }
     });
 }
@@ -107,7 +111,7 @@ GenerateFood = function () {
 
 moveUp = function () {
     var check = true;
-
+    console.log(speed);
     setTimeout(function () {
             if (direction === "down") {
                 alert("Game Over");
@@ -118,28 +122,33 @@ moveUp = function () {
 
                 return;
             }
-
+            for(var i=1;i<snake.length;i++){
+            if(snake[0]===snake[i]){
+                 alert("Game Over");
+                clearAll();
+                return;
+            }
+            }
             if ($("." + snake[0]).hasClass("food")) {
-
+                console.log("food is"+snake[0]);
                 GenerateFood();
+                if(speed>20)
                 speed = speed - 10;
                 $("." + snake[0]).removeClass("food");
                 $("." + snake[0]).removeClass("snakeHead");
                 $("." + snake[0]).addClass("snakeTrail");
                 var temp = snake[0] - 100;
-                 // console.log(snake.length);
-                for (var i = snake.length-1; i > 0; i--) {
+
+                for (var i = snake.length-1; i >= 0; i--) {
                     snake[i + 1] = snake[i];
 
                 }
-               // console.log(snake.length);
+
+
                 snake[0] = temp;
                 $("." + snake[0]).addClass("snakeHead");
-                  for (var j = 0; j < snake.length; j++) {
-                    console.log( $("." + snake[j]).attr("class"));
 
-                }
-
+                console.log("0 is "+snake[0]);
             } else {
                 $("." + snake[0]).removeClass("snakeHead");
                 $("." + snake[0]).addClass("snakeTrail");
@@ -172,7 +181,7 @@ moveUp = function () {
 
 moveDown = function () {
     var check = true;
-
+console.log(speed);
     setTimeout(function () {
 
 
@@ -185,8 +194,15 @@ moveDown = function () {
 
                 return;
             }
+         for(var i=1;i<snake.length;i++){
+            if(snake[0]===snake[i]){
+                 alert("Game Over");
+                clearAll();
+                return;
+            }}
             if ($("." + snake[0]).hasClass("food")) {
                 GenerateFood();
+                if(speed>20)
                 speed = speed - 10;
                 $("." + snake[0]).removeClass("food");
                 $("." + snake[0]).removeClass("snakeHead");
@@ -197,7 +213,7 @@ moveDown = function () {
                     clearAll();
                     return;
                 }
-                for (var i = snake.length; i > 0; i--) {
+                for (var i = snake.length-1; i >= 0; i--) {
                     snake[i + 1] = snake[i];
 
                 }
@@ -234,7 +250,7 @@ moveDown = function () {
 
 moveRight = function () {
     var check = true;
-
+console.log(speed);
     setTimeout(function () {
 
 
@@ -247,6 +263,12 @@ moveRight = function () {
 
                 return;
             }
+         for(var i=1;i<snake.length;i++){
+            if(snake[0]===snake[i]){
+                 alert("Game Over");
+                clearAll();
+                return;
+            }}
             var chkLength = $(".snakeHead").attr("class").substr(7, 2);
 
             if (parseInt(chkLength) > 48) {
@@ -256,12 +278,13 @@ moveRight = function () {
             }
             if ($("." + snake[0]).hasClass("food")) {
                 GenerateFood();
+                if(speed>20)
                 speed = speed - 10;
                 $("." + snake[0]).removeClass("food");
                 $("." + snake[0]).removeClass("snakeHead");
                 $("." + snake[0]).addClass("snakeTrail");
                 var temp = parseInt(snake[0]) + 1;
-                for (var i = snake.length; i > 0; i--) {
+                for (var i = snake.length-1; i >= 0; i--) {
                     snake[i + 1] = snake[i];
 
                 }
@@ -291,7 +314,7 @@ moveRight = function () {
 
 moveLeft = function () {
     var check = true;
-
+console.log(speed);
     setTimeout(function () {
 
 
@@ -304,6 +327,12 @@ moveLeft = function () {
 
                 return;
             }
+         for(var i=1;i<snake.length;i++){
+            if(snake[0]===snake[i]){
+                 alert("Game Over");
+                clearAll();
+                return;
+            }}
             var chkLength = $(".snakeHead").attr("class").substr(7, 2);
 
             if (parseInt(chkLength) < 2) {
@@ -314,12 +343,13 @@ moveLeft = function () {
             if ($("." + snake[0]).hasClass("food")) {
 
                 GenerateFood();
+                if(speed>20)
                 speed = speed - 10;
                 $("." + snake[0]).removeClass("food");
                 $("." + snake[0]).removeClass("snakeHead");
                 $("." + snake[0]).addClass("snakeTrail");
                 var temp = parseInt(snake[0]) - 1;
-                for (var i = snake.length; i > 0; i--) {
+                for (var i = snake.length-1; i >= 0; i--) {
                     snake[i + 1] = snake[i];
 
                 }
@@ -357,7 +387,7 @@ clearAll = function () {
     len = parseInt(len / 2);
     direction = "";
     snake.length = 3;
-    speed = mainspeed;
+
     createGrid(maxLength, maxwidth);
     //    $(".grid").eq(len).addClass("snakeHead");
     //    $(".grid").eq(len - 1).addClass("snakeTrail");

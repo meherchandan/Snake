@@ -3,14 +3,21 @@
     text-align: center;
 }
 
+body{
+    text-align: center;
+    background-image: url(snake.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
 .grid{
-    width: 10px;
-    height: 10px;
+    width: 20px;
+    height: 20px;
 
     display: inline-block;
 
-    border: .5px solid  rgba(180, 180, 180, 0.46);
-    background-color: rgba(214, 211, 211, 0.11);
+/*    border: .5px solid  rgba(180, 180, 180, 0.46);*/
+
+
 
 
 }
@@ -25,11 +32,22 @@ div{
 }
 .snakeHead{
     background-color: red;
+    border-radius: 10px;
 }
 .snakeTrail{
     background-color: blue;
+    border-radius: 10px;
+
 }
 
 .food{
-    background-color: yellow;
+    background-color: rgba(255, 0, 177, 0.76);
+    border-radius: 10px;
+}
+#maingrid{
+    width: 73%;
+    margin: auto;
+    height: auto;
+    background-color: #63c9c9;
+    border:2px solid black;
 }
