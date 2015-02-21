@@ -1,38 +1,42 @@
 var mainspeed = 0;
 var maxLength = 0;
 var maxwidth = 0;
+var score=0;
 
 $(document).ready(function () {
-     var $le = 4000;
+     var $le = 3800;
      var $wid = 50;
-
+        maxLength = $le;
+        maxwidth = $wid;
     $('.small').click(function () {
 
         mainspeed = 200;
-        maxLength = $le;
-        maxwidth = $wid;
+        gameScore();
+         $('#scoreBoard').css({"display":"inline-block"});
+        $('#maingrid').addClass("active");
+
         createGrid($le, $wid);
+
 
     });
 
     $('.medium').click(function () {
 
         mainspeed = 180;
-        maxLength = $le;
-        maxwidth = $wid;
+      gameScore();
+           $('#scoreBoard').css({"display":"inline-block"});
+        $('#maingrid').addClass("active");
         createGrid($le, $wid);
     });
 
-    $('.large').click(function () {
+    $('.Expert').click(function () {
 
         mainspeed = 150;
-        maxLength = $le;
-        maxwidth = $wid;
+     gameScore();
+           $('#scoreBoard').css({"display":"inline-block"});
+        $('#maingrid').addClass("active");
         createGrid($le, $wid);
     });
-
-
-
 });
 
 var snake = [];
@@ -43,9 +47,9 @@ var speed = 200;
 createGrid = function (length, width) {
     var i = 1000;
     var j = 0;
-    speed=200;
+    speed=mainspeed;
     maxLength = length;
-    maxwidth - width;
+    maxwidth = width;
     $("#maingrid").empty();
     for (i = 1000; i < length;) {
         $('#maingrid').append("<div id='row' class='" + i + "'></div>");
@@ -58,7 +62,7 @@ createGrid = function (length, width) {
     }
 
     var snakeclass=length/2+width/2+500;
-    console.log("total"+snakeclass);
+
     gridsize = $(".grid").length;
 
     var len = $(".grid").length;
@@ -70,6 +74,18 @@ createGrid = function (length, width) {
     snake[0]=snakeclass;
     snake[1]=snakeclass-1;
     snake[2]=snakeclass-2;
+ $('.snakeHead').css({
+          "border-top-left-radius": "5px",
+    "border-bottom-left-radius": "5px",
+     "border-top-right-radius": "10px",
+    "border-bottom-right-radius": "10px"
+        });
+          $('.snakeTrail').css({
+          "border-top-left-radius": "5px",
+    "border-bottom-left-radius": "5px",
+     "border-top-right-radius": "10px",
+    "border-bottom-right-radius": "10px"
+        });
 
     $("body").keypress(function (event) {
         if (event.keyCode === 38) { //Up arrow
@@ -99,9 +115,20 @@ createGrid = function (length, width) {
 }
 
 GenerateFood = function () {
+    var foodnumber1=Math.floor((Math.random() * (maxLength-1000)) + 1001);
+    var foodnumber2=Math.floor((Math.random() * (maxwidth-2)) + 1);
+    var foodNumber = parseInt(foodnumber1/100)*100+parseInt(foodnumber2);
+    $("."+foodNumber).addClass("food");
+    console.log("food1"+foodnumber1);
+    console.log("food2"+foodnumber2);
+    console.log(foodNumber);
 
-    var foodNumber = Math.floor((Math.random() * gridsize) + 1);
-    $(".grid").eq(foodNumber).addClass("food");
+     $('.food').css({
+          "border-top-left-radius": "10px",
+    "border-bottom-left-radius": "10px",
+     "border-top-right-radius": "10px",
+    "border-bottom-right-radius": "10px"
+        });
 
     return;
 }
@@ -111,7 +138,6 @@ GenerateFood = function () {
 
 moveUp = function () {
     var check = true;
-    console.log(speed);
     setTimeout(function () {
             if (direction === "down") {
                 alert("Game Over");
@@ -129,9 +155,11 @@ moveUp = function () {
                 return;
             }
             }
+
             if ($("." + snake[0]).hasClass("food")) {
-                console.log("food is"+snake[0]);
                 GenerateFood();
+                score=parseInt(score)+10;
+                gameScore();
                 if(speed>20)
                 speed = speed - 10;
                 $("." + snake[0]).removeClass("food");
@@ -148,7 +176,6 @@ moveUp = function () {
                 snake[0] = temp;
                 $("." + snake[0]).addClass("snakeHead");
 
-                console.log("0 is "+snake[0]);
             } else {
                 $("." + snake[0]).removeClass("snakeHead");
                 $("." + snake[0]).addClass("snakeTrail");
@@ -169,6 +196,18 @@ moveUp = function () {
                 snake[0] = temp;
                 $("." + snake[0]).addClass("snakeHead");
             }
+        $('.snakeHead').css({
+          "border-top-left-radius": "10px",
+    "border-bottom-left-radius": "5px",
+     "border-top-right-radius": "10px",
+    "border-bottom-right-radius": "5px"
+        });
+          $('.snakeTrail').css({
+          "border-top-left-radius": "10px",
+    "border-bottom-left-radius": "5px",
+     "border-top-right-radius": "10px",
+    "border-bottom-right-radius": "5px"
+        });
             moveUp();
         }, speed
 
@@ -181,7 +220,6 @@ moveUp = function () {
 
 moveDown = function () {
     var check = true;
-console.log(speed);
     setTimeout(function () {
 
 
@@ -202,6 +240,8 @@ console.log(speed);
             }}
             if ($("." + snake[0]).hasClass("food")) {
                 GenerateFood();
+                 score=parseInt(score)+10;
+                gameScore();
                 if(speed>20)
                 speed = speed - 10;
                 $("." + snake[0]).removeClass("food");
@@ -239,6 +279,18 @@ console.log(speed);
                 $("." + snake[0]).addClass("snakeHead");
             }
 
+        $('.snakeHead').css({
+          "border-top-left-radius": "5px",
+    "border-bottom-left-radius": "10px",
+     "border-top-right-radius": "5px",
+    "border-bottom-right-radius": "10px"
+        });
+          $('.snakeTrail').css({
+          "border-top-left-radius": "5px",
+    "border-bottom-left-radius": "10px",
+     "border-top-right-radius": "5px",
+    "border-bottom-right-radius": "10px"
+        });
             moveDown();
         }, speed
 
@@ -250,7 +302,6 @@ console.log(speed);
 
 moveRight = function () {
     var check = true;
-console.log(speed);
     setTimeout(function () {
 
 
@@ -276,8 +327,11 @@ console.log(speed);
                 clearAll();
                 return;
             }
+
             if ($("." + snake[0]).hasClass("food")) {
                 GenerateFood();
+                 score=parseInt(score)+10;
+                gameScore();
                 if(speed>20)
                 speed = speed - 10;
                 $("." + snake[0]).removeClass("food");
@@ -303,6 +357,19 @@ console.log(speed);
                 snake[0] = temp;
                 $("." + snake[0]).addClass("snakeHead");
             }
+        $('.snakeHead').css({
+          "border-top-left-radius": "5px",
+    "border-bottom-left-radius": "5px",
+     "border-top-right-radius": "10px",
+    "border-bottom-right-radius": "10px"
+        });
+          $('.snakeTrail').css({
+          "border-top-left-radius": "5px",
+    "border-bottom-left-radius": "5px",
+     "border-top-right-radius": "10px",
+    "border-bottom-right-radius": "10px"
+        });
+
             moveRight();
         }, speed
 
@@ -314,7 +381,6 @@ console.log(speed);
 
 moveLeft = function () {
     var check = true;
-console.log(speed);
     setTimeout(function () {
 
 
@@ -343,6 +409,8 @@ console.log(speed);
             if ($("." + snake[0]).hasClass("food")) {
 
                 GenerateFood();
+                 score=parseInt(score)+10;
+                gameScore();
                 if(speed>20)
                 speed = speed - 10;
                 $("." + snake[0]).removeClass("food");
@@ -368,6 +436,18 @@ console.log(speed);
                 snake[0] = temp;
                 $("." + snake[0]).addClass("snakeHead");
             }
+        $('.snakeHead').css({
+          "border-top-left-radius": "10px",
+    "border-bottom-left-radius": "10px",
+     "border-top-right-radius": "5px",
+    "border-bottom-right-radius": "5px"
+        });
+          $('.snakeTrail').css({
+          "border-top-left-radius": "10px",
+    "border-bottom-left-radius": "10px",
+     "border-top-right-radius": "5px",
+    "border-bottom-right-radius": "5px"
+        });
             moveLeft();
         }, speed
 
@@ -386,13 +466,18 @@ clearAll = function () {
     var len = $(".grid").length;
     len = parseInt(len / 2);
     direction = "";
+    score=0;
+    gameScore();
     snake.length = 3;
 
     createGrid(maxLength, maxwidth);
-    //    $(".grid").eq(len).addClass("snakeHead");
-    //    $(".grid").eq(len - 1).addClass("snakeTrail");
-    //    $(".grid").eq(len - 2).addClass("snakeTrail");
-    //    snake[0] = $(".grid").eq(len).attr("class").substr(5, 4);
-    //    snake[1] = $(".grid").eq(len - 1).attr("class").substr(5, 4);
-    //    snake[2] = $(".grid").eq(len - 2).attr("class").substr(5, 4);
+
+}
+
+gameScore = function(){
+
+var str = $( "p" ).text();
+$( "p" ).html( str.substr(0,8)+score );
+
+return;
 }
