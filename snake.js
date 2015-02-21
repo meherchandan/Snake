@@ -200,7 +200,7 @@ moveUp = function () {
 
                 var temp = snake[0] - 100;
                 if (temp < 1000) {
-                    alert("Game OVer");
+                    alert("Game Over");
                     clearAll();
                     return;
                 }
@@ -212,6 +212,7 @@ moveUp = function () {
 
                 snake[0] = temp;
                 $("." + snake[0]).addClass("snakeHead");
+
             }
         $('.snakeHead').css({
           "border-top-left-radius": "10px",
@@ -224,6 +225,7 @@ moveUp = function () {
     "border-bottom-left-radius": "5px",
      "border-top-right-radius": "10px",
     "border-bottom-right-radius": "5px"
+
         });
             moveUp();
         }, speed

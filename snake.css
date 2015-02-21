@@ -50,20 +50,29 @@ div{
     line-height: 0px;
 }
 .snakeHead{
-    background-color: #840909;
+/*    background-color: #840909;*/
+
+      background-image: url(Images/snakehead.jpg);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: 50% 50%;
 
 -webkit-box-shadow: 0px 0px 12px 5px rgba(31, 31, 31, 0.74);
 -moz-box-shadow: 0px 0px 12px 5px rgba(31, 31, 31, 0.74);
 box-shadow: 0px 0px 12px 5px rgba(31, 31, 31, 0.74);
 }
 .snakeTrail{
-    background-color: rgba(0, 0, 255, 0.66);
+/*    background-color: rgba(0, 0, 255, 0.66);*/
 /*
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
      border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
 */
+     background-image: url(Images/snaketrail.jpg);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: 50% 50%;
 -webkit-box-shadow: 0px 0px 12px 5px rgba(31, 31, 31, 0.74);
 -moz-box-shadow: 0px 0px 12px 5px rgba(31, 31, 31, 0.74);
 box-shadow: 0px 0px 12px 5px rgba(31, 31, 31, 0.74);
@@ -71,6 +80,7 @@ box-shadow: 0px 0px 12px 5px rgba(31, 31, 31, 0.74);
 
 .food{
     background-color: rgba(255, 0, 177, 0.76);
+
     border-radius: 10px;
 }
 #maingrid{
