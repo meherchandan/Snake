@@ -9,33 +9,50 @@ $(document).ready(function () {
         maxLength = $le;
         maxwidth = $wid;
     $('.small').click(function () {
-
+        $('body').css({"background-image":"url(Images/Image1.jpeg)"});
         mainspeed = 200;
         gameScore();
          $('#scoreBoard').css({"display":"inline-block"});
-        $('#maingrid').addClass("active");
-
         createGrid($le, $wid);
+         $('#maingrid').hide();
+
+        $('#maingrid').addClass("active");
+         $('#maingrid').slideDown();
+         $('#scoreBoard').hide();
+         $('#scoreBoard').fadeIn();
+
 
 
     });
 
     $('.medium').click(function () {
 
-        mainspeed = 180;
-      gameScore();
-           $('#scoreBoard').css({"display":"inline-block"});
-        $('#maingrid').addClass("active");
+       $('body').css({"background-image":"url(Images/Image1.jpeg)"});
+        mainspeed = 150;
+        gameScore();
+         $('#scoreBoard').css({"display":"inline-block"});
         createGrid($le, $wid);
+         $('#maingrid').hide();
+
+        $('#maingrid').addClass("active");
+         $('#maingrid').slideDown();
+         $('#scoreBoard').hide();
+         $('#scoreBoard').fadeIn();
     });
 
     $('.Expert').click(function () {
 
-        mainspeed = 150;
-     gameScore();
-           $('#scoreBoard').css({"display":"inline-block"});
-        $('#maingrid').addClass("active");
+        $('body').css({"background-image":"url(Images/Image1.jpeg)"});
+        mainspeed = 100;
+        gameScore();
+         $('#scoreBoard').css({"display":"inline-block"});
         createGrid($le, $wid);
+         $('#maingrid').hide();
+
+        $('#maingrid').addClass("active");
+         $('#maingrid').slideDown();
+         $('#scoreBoard').hide();
+         $('#scoreBoard').fadeIn();
     });
 });
 
@@ -115,7 +132,7 @@ createGrid = function (length, width) {
 }
 
 GenerateFood = function () {
-    var foodnumber1=Math.floor((Math.random() * (maxLength-1000)) + 1001);
+    var foodnumber1=Math.floor((Math.random() * (maxLength-1100)) + 1001);
     var foodnumber2=Math.floor((Math.random() * (maxwidth-2)) + 1);
     var foodNumber = parseInt(foodnumber1/100)*100+parseInt(foodnumber2);
     $("."+foodNumber).addClass("food");

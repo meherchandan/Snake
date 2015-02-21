@@ -10,7 +10,7 @@
 
 body{
     text-align: center;
-    background-image: url(snake.png);
+    background-image: url(Images/Image2.jpeg);
     background-repeat: no-repeat;
     background-size: cover;
 }
@@ -21,7 +21,10 @@ body{
 #mode{
     height:50px;
     text-align: center;
-
+    background-color: #00ff45;
+    border: 0px solid black;
+    font-weight: bold;
+    border-radius: 15px;
 }
 
 .grid{
@@ -54,7 +57,7 @@ div{
 box-shadow: 0px 0px 12px 5px rgba(31, 31, 31, 0.74);
 }
 .snakeTrail{
-    background-color: blue;
+    background-color: rgba(0, 0, 255, 0.66);
 /*
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
@@ -74,7 +77,10 @@ box-shadow: 0px 0px 12px 5px rgba(31, 31, 31, 0.74);
     width: 73%;
     margin: auto;
     height: auto;
-    background-color: #63c9c9;
+    background-image: url(Image1.jpeg);
+     background-repeat: no-repeat;
+    background-size: cover;
+/*    background-color: #63c9c9;*/
 
 
 
@@ -99,8 +105,8 @@ p{
     color: white;
     font-size: 40px;
     text-align: left;
-
+}
 .active{
-   border:2px solid black;
+   border:1px solid black;
 
 }
